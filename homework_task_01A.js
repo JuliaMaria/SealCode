@@ -24,7 +24,7 @@ Nauczyciel.prototype.podajIloscLatPracy = function() {
   }
 
 function Wychowawca(imie, nazwisko, rokUrodzenia, plec, nauczanyPrzedmiot, rokRozpoczeciaPracy, przydzielonaKlasa){
-	Nauczyciel.call(this, imie, nazwisko, rokUrodzenia, plec, 		    nauczanyPrzedmiot, rokRozpoczeciaPracy);
+	Nauczyciel.call(this, imie, nazwisko, rokUrodzenia, plec, nauczanyPrzedmiot, rokRozpoczeciaPracy);
   this.przydzielonaKlasa = przydzielonaKlasa;
 }
 
