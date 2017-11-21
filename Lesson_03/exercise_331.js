@@ -12,7 +12,7 @@ var b = $('nav');
 var c = $('aside');
 var d = $('form');
 
-console.log(funkcja(a));
-console.log(funkcja(b));
-console.log(funkcja(c));
-console.log(funkcja(d));
+funkcja(a);
+funkcja(b);
+funkcja(c);
+funkcja(d);
