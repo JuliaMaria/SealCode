@@ -1,8 +1,8 @@
-var date = document.getElementById("date");
-date.innerHTML = new Date().toLocaleDateString();
+var date = $('#date');
+date.text(new Date().toLocaleDateString());
 
-var button = document.getElementById('submitbutton');
-button.addEventListener('click', addTask, false);
+var button = $('#submitbutton');
+button.click(addTask);
 
 $('input[type=text]').on('keydown', function(e) {
     if (e.which == 13) {
@@ -11,34 +11,29 @@ $('input[type=text]').on('keydown', function(e) {
     }
 });
 
-var delButtons = document.querySelectorAll(".delbutton");
-for (var i=0; i<delButtons.length; i++) {
-  delButtons[i].addEventListener('click', deleteTask, false);
-}
-
-
 function addTask() {
-  var newValue = document.getElementById("newtask").value;
-  var newTaskText = document.createTextNode(newValue);
-  var newTask = document.createElement('p');
-  newTask.appendChild(newTaskText);
-  var check = document.createElement('input');
-  check.setAttribute('type','checkbox');
-  var text = document.createTextNode('Task done');
-  check.appendChild(text);
-  var deleteButton = document.createElement('button');
-  deleteButton.setAttribute('type','button');
-  deleteButton.setAttribute('class', 'delbutton');
-  var deleteText = document.createTextNode('Delete');
-  deleteButton.appendChild(deleteText);
-  deleteButton.addEventListener('click', deleteTask, false);
-  newTask.appendChild(check);
-  newTask.appendChild(deleteButton);
-  var tasks = document.getElementById("tasklist");
-  tasks.appendChild(newTask);
+ var newValue = $('#newtask').val();
+ if (newValue.length != 0) {
+ var button = $('<button type="button" class="delbutton">Delete</button>');
+ button.on('click', function() {
+   $(this).parent().remove();
+ });
+ var taskDone = $('<input type="checkbox"><label></label><br>');
+ taskDone.on('change', function() {
+   if ($(this).is(':checked')) {
+     $(this).next('label').text('Task done');
+   }
+   else {
+     $(this).next('label').text('');
+   }
+ });
+ var newTask = $('<p>' + newValue + '</p>');
+ newTask.append(taskDone);
+ newTask.append(button);
+ $('div').append(newTask);
+ $('#newtask').val('');
 }
-
-function deleteTask() {
-  var deleteElement = this.parentNode;
-  deleteElement.parentNode.removeChild(deleteElement);
+else {
+  alert('You cannot add an empty task!!!');
+}
 }
