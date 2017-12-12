@@ -3,11 +3,19 @@ function loadTasks() {
   .done( function(data){
     $.each(data, function(key, val) {
       var newValue = val.body.title;
+	  var isDone = val.body.is_done;
       var button = $('<button type="button" class="delbutton">Delete</button>');
       button.on('click', function() {
         $(this).parent().remove();
       });
-      var taskDone = $('<input type="checkbox"><label></label><br>');
+	  if(isDone == true) {
+		var taskDone = $('<input type="checkbox"><label>Task done</label><br>');
+		taskDone.prop('checked', true);
+	  }
+	  else {
+		var taskDone = $('<input type="checkbox"><label></label><br>');
+		taskDone.prop('checked', false);
+	  }
       taskDone.on('change', function() {
         if ($(this).is(':checked')) {
           $(this).next('label').text('Task done');
@@ -60,25 +68,19 @@ function addTask() {
  newTask.append(button);
  $('div').append(newTask);
  $('#newtask').val('');
-
- $.ajax({
-  type: "POST",
-  url: 'http://sealcode.org:8082/api/v1/resources/task',
-  dataType: 'application/json',
-  data: JSON.stringify({
+  
+  function sendTask() {
+  $.post('http://sealcode.org:8082/api/v1/resources/task', JSON.stringify({
     "title": newValue,
     "is_done": false
-  }),
-  complete: function() {
-  alert('Completed!');
-  },
-  success: function() {
+  }), function() {
     alert('Successfully uploaded!');
-  },
-  fail: function() {
-  alert('Failed!');
+  });
   }
-});
+  
+  sendTask();
+  
+
 
 }
 else {
