@@ -1,0 +1,25 @@
+1 pkt kontrolny
+	x=4
+	y=undefined
+	i=undefined
+2 pkt kontrolny
+	1 iteracja
+		x=4
+		y=1
+		i=0
+	2 iteracja
+		x=4
+		y=2
+		i=1
+	3 iteracja
+		x=4
+		y=3
+		i=2
+	4 iteracja
+		x=4
+		y=4
+		i=3
+3 pkt kontrolny
+		x=4
+		y=4
+		i=undefined
